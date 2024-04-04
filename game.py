@@ -13,8 +13,6 @@ def generate_truth_table(logic_gate):
     else:
         return [(x, y, logic_gates[logic_gate](x, y)) for x in (0, 1) for y in (0, 1)]
 
-
-
 def display_truth_table(truth_table):
     if len(truth_table[0]) == 2:
         print("Input | Output")
