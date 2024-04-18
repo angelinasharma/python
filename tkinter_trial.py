@@ -11,8 +11,7 @@ def button_clicked():
     time.sleep(1)
     Text1.config(text="Press the button...")
 
-Text1 = tkinter.Label(text="Press the button...")
-Text1.pack()
+Text1 = tkinter.Label(text="Press the button...").place(x = 200, y = 0)
 
 Button1 = tkinter.Button(text="Press Me", command=button_clicked)
 Button1.pack()
