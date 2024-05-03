@@ -1,76 +1,100 @@
-# Write a Python function to find the maximum and minimum numbers from a sequence of numbers:
+# Scan n values in the range 0-3 and print the number of times each value has occurred:
 
-def find_max_min(numbers):
-    if not numbers:
-        return None, None
-    max_num = min_num = numbers[0]
-    for num in numbers:
-        if num > max_num:
-            max_num = num
-        elif num < min_num:
-            min_num = num
-    return max_num, min_num
+counts = [0] * 4
+n = int(input("Enter the number of values: "))
+for _ in range(n):
+    value = int(input("Enter a value between 0 and 3: "))
+    if 0 <= value <= 3:
+        counts[value] += 1
+for i in range(4):
+    print("Value", i, "occurred", counts[i], "times")
 
-# Write a Python function that takes a positive integer and returns the sum of the cube of all the positive integers smaller than the specified number:
+#Create a tuple to store n numeric values and find the average of all values:
 
-def sum_of_cubes(n):
-    if n <= 0:
-        return 0
-    return sum([i**3 for i in range(1, n)])
+n = int(input("Enter the number of values: "))
+values = tuple(float(input("Enter a numeric value: ")) for _ in range(n))
+average = sum(values) / n
+print("Average of the values:", average)
 
-#Write a Python function to print 1 to n using recursion:
+# Write a program to input a list of scores for N students in a list data type. Find the score of the runner-up and print the output:
 
-def print_numbers(n):
-    if n <= 0:
-        return
-    print_numbers(n - 1)
-    print(n)
+N = int(input("Enter the number of students: "))
+scores = list(map(int, input("Enter the scores of the students separated by space: ").split()))
+unique_scores = sorted(set(scores), reverse=True)
+print("Runner-up score:", unique_scores[1])
 
-#Write a recursive function to print Fibonacci series up to n terms:
+'''    
+Create a dictionary of n persons where the key is the name and the value is the city.
+    a) Display all names
+    b) Display all city names
+    c) Display student name and city of all students.
+    d) Count the number of students in each city.
+'''
 
-def fibonacci(n, a=0, b=1):
-    if n <= 0:
-        return
-    print(a, end=" ")
-    fibonacci(n-1, b, a+b)
+n = int(input("Enter the number of persons: "))
+person_dict = {}
+for i in range(n):
+    name = input("Enter name of person {}: ".format(i+1))
+    city = input("Enter city of person {}: ".format(i+1))
+    person_dict[name] = city
 
-# Write a lambda function to find the volume of a cone:
+# a) Display all names
+print("Names of all persons:", ', '.join(person_dict.keys()))
 
-volume_of_cone = lambda radius, height: (1/3) * 3.14159 * (radius**2) * height
+# b) Display all city names
+print("City names:", ', '.join(set(person_dict.values())))
 
-# Write a lambda function which gives a tuple of max and min from a list:
+# c) Display student name and city of all students.
+print("Details of all persons:")
+for name, city in person_dict.items():
+    print("Name:", name, "| City:", city)
 
-max_min_tuple = lambda lst: (max(lst), min(lst))
+# d) Count the number of students in each city.
+city_counts = {}
+for city in person_dict.values():
+    city_counts[city] = city_counts.get(city, 0) + 1
+print("Number of students in each city:")
+for city, count in city_counts.items():
+    print(city, "-", count)
 
+'''
+Store details of n movies in a dictionary by taking input from the user. Each movie must store details like name, year, director name, production cost, collection made (earning) & perform the following:
+    a) Print all movie details
+    b) Display names of movies released before 2015
+    c) Print movies that made a profit.
+    d) Print movies directed by a particular director.
+'''
 
-# Write functions to explain mentioned concepts:
+n = int(input("Enter the number of movies: "))
+movies = []
+for i in range(n):
+    name = input("Enter name of movie {}: ".format(i+1))
+    year = int(input("Enter year of release for {}: ".format(name)))
+    director = input("Enter director name for {}: ".format(name))
+    production_cost = float(input("Enter production cost for {}: ".format(name)))
+    collection = float(input("Enter collection made for {}: ".format(name)))
+    movies.append({"name": name, "year": year, "director": director, "production_cost": production_cost, "collection": collection})
 
-#a. Keyword argument:
+# a) Print all movie details
+print("Details of all movies:")
+for movie in movies:
+    print("Name:", movie["name"], "| Year:", movie["year"], "| Director:", movie["director"], "| Production Cost:", movie["production_cost"], "| Collection:", movie["collection"])
 
-def greet(name, message="Hello"):
-    print(message, name)
+# b) Display names of movies released before 2015
+print("Movies released before 2015:")
+for movie in movies:
+    if movie["year"] < 2015:
+        print(movie["name"])
 
-# Usage:
-greet(name="John")  
-greet(message="Hi", name="Alice")  
+# c) Print movies that made a profit.
+print("Movies that made a profit:")
+for movie in movies:
+    if movie["collection"] > movie["production_cost"]:
+        print(movie["name"])
 
-# b. Default argument:
-
-def greet(name, message="Hello"):
-    print(message, name)
-
-# Usage:
-greet("John")  
-greet("Alice", "Hi") 
-
-#c. Variable length argument:
-
-def sum_values(*args):
-    total = 0
-    for num in args:
-        total += num
-    return total
-
-# Usage:
-print(sum_values(1, 2, 3)) 
-print(sum_values(1, 2, 3, 4, 5))  
+# d) Print movies directed by a particular director.
+director_name = input("Enter the name of the director to search for: ")
+print("Movies directed by {}:".format(director_name))
+for movie in movies:
+    if movie["director"] == director_name:
+        print(movie["name"])
